@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Computer implements IPlayer{
 
+    public static final Computer NULL = new Computer("-", "unknown");
     private static final String COMPUTER_NAME = "Computer";
     private static final AtomicInteger nameCounter = new AtomicInteger(1);
 

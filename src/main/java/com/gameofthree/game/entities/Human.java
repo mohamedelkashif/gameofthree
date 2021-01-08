@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Human implements IPlayer {
 
+    public static final Human NULL = new Human("-", "unknown");
+
     private final String id;
     private final String name;
 
