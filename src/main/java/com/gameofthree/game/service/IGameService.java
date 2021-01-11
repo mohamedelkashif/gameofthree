@@ -1,6 +1,7 @@
 package com.gameofthree.game.service;
 
 import com.gameofthree.game.entities.IPlayer;
+import com.gameofthree.game.entities.InputNumber;
 
 public interface IGameService {
 
