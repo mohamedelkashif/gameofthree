@@ -1,5 +1,6 @@
 package com.gameofthree.game.validators;
 
+import com.gameofthree.game.entities.InputNumber;
 import com.gameofthree.game.exceptions.ValidationException;
 
 import java.util.ArrayList;
