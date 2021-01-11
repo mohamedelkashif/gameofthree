@@ -2,6 +2,7 @@ package com.gameofthree.game.validators;
 
 import com.gameofthree.game.entities.InputNumber;
 import com.gameofthree.game.exceptions.ValidationException;
+import com.gameofthree.game.service.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class InputNumberWithinRangeValidator implements Validator<Game> {
     }
 
     @Override
-    public void validateOrThrow(Game obj) throws ValidationException {
+    public void validateOrThrow(Game game) throws ValidationException {
         if (!isValidInputNumber(inputNumber)) {
             throw new ValidationException(INVALID_INPUT_FOR_GAME_MSG.apply(inputNumber));
         }

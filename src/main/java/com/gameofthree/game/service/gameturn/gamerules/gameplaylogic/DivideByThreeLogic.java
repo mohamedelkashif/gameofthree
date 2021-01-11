@@ -3,6 +3,7 @@ package com.gameofthree.game.service.gameturn.gamerules.gameplaylogic;
 import com.gameofthree.game.entities.OutputNumber;
 import com.gameofthree.game.entities.gametrun.GameTurnInput;
 import com.gameofthree.game.validators.Validator;
+import com.gameofthree.utils.PropertiesConfigLoader;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,6 +4,7 @@ import com.gameofthree.game.entities.gametrun.GameTurnInput;
 import com.gameofthree.game.exceptions.GameRoundException;
 import com.gameofthree.game.exceptions.ValidationException;
 import com.gameofthree.game.validators.Validator;
+import com.gameofthree.utils.PropertiesConfigLoader;
 
 import java.util.ArrayList;
 import java.util.List;

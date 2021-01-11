@@ -2,9 +2,12 @@ package com.gameofthree.game.service;
 
 import com.gameofthree.game.entities.IPlayer;
 import com.gameofthree.game.entities.InputNumber;
+import com.gameofthree.game.validators.CanPlayGameValidator;
+import com.gameofthree.game.validators.InputNumberWithinRangeValidator;
+import com.gameofthree.game.validators.IsCurrentPlayerGameValidator;
 import com.gameofthree.game.validators.NewGameValidator;
 import com.gameofthree.game.validators.UniquePlayerValidator;
-import com.gameofthree.game.validators.isGameOpenForMorePlayersValidator;
+import com.gameofthree.game.validators.IsGameOpenForMorePlayersValidator;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -12,11 +15,15 @@ public class GameService implements IGameService {
 
     private final AtomicReference<Game> game;
 
+    public GameService(Game game) {
+        this.game = new AtomicReference<>(game);
+    }
+
 
     @Override
     public void addPlayer(IPlayer player) {
         new UniquePlayerValidator(player).validateOrThrow(game.get());
-        new isGameOpenForMorePlayersValidator().validateOrThrow(game.get());
+        new IsGameOpenForMorePlayersValidator().validateOrThrow(game.get());
         game.set(game.get().addPlayer(player));
     }
 

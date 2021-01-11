@@ -1,6 +1,7 @@
 package com.gameofthree.game.validators;
 
 import com.gameofthree.game.exceptions.ValidationException;
+import com.gameofthree.game.service.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,13 @@ public class NewGameValidator implements Validator<Game> {
     private List<String> messages = new ArrayList<>();
 
     @Override
-    public boolean validate(Game obj) {
+    public boolean validate(Game game) {
         return isValidPlayerAggregate(game) ||
                 setInvalidState(INVALID_PLAYER_AGGREGATE_MSG);
     }
 
     @Override
-    public void validateOrThrow(Game obj) throws ValidationException {
+    public void validateOrThrow(Game game) throws ValidationException {
         if (!isValidPlayerAggregate(game)) {
             throw new ValidationException(INVALID_PLAYER_AGGREGATE_MSG);
         }

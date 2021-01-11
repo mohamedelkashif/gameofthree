@@ -1,5 +1,7 @@
 package com.gameofthree.game.entities;
 
+import com.gameofthree.utils.PropertiesConfigLoader;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;

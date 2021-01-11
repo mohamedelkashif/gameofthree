@@ -1,7 +1,11 @@
 package com.gameofthree.game.service;
 
 import com.gameofthree.game.entities.IPlayer;
+import com.gameofthree.game.entities.InputNumber;
 import com.gameofthree.game.entities.PlayerAggregate;
+import com.gameofthree.game.entities.gametrun.GameTurnInput;
+import com.gameofthree.game.entities.gametrun.GameTurnResult;
+import com.gameofthree.game.service.gameturn.IGameTurnService;
 import com.gameofthree.game.validators.CanValidate;
 import com.gameofthree.game.validators.Validator;
 
@@ -9,45 +13,45 @@ import java.util.Objects;
 
 public class Game implements CanValidate<Game> {
 
-    private final IGameRoundService gameRoundService;
+    private final IGameTurnService gameTurnService;
     private final PlayerAggregate playerAggregate;
-    private final GameRoundResult gameRoundResult;
+    private final GameTurnResult gameTurnResult;
 
-    public Game(final IGameRoundService gameRoundService) {
-        this.gameRoundService = gameRoundService;
+    public Game(final IGameTurnService gameTurnService) {
+        this.gameTurnService = gameTurnService;
         this.playerAggregate = PlayerAggregate.NULL;
-        this.gameRoundResult = GameRoundResult.NULL;
+        this.gameTurnResult = GameTurnResult.NULL;
     }
 
-    public Game(final IGameRoundService gameRoundService, final PlayerAggregate playerAggregate, final GameRoundResult gameRoundResult) {
-        this.gameRoundService = gameRoundService;
+    public Game(final IGameTurnService gameTurnService, final PlayerAggregate playerAggregate, final GameTurnResult gameRoundResult) {
+        this.gameTurnService = gameTurnService;
         this.playerAggregate = playerAggregate;
-        this.gameRoundResult = gameRoundResult;
+        this.gameTurnResult = gameRoundResult;
     }
 
     public Game startGame() {
-        return new Game(gameRoundService, playerAggregate, GameRoundResult.getInitial());
+        return new Game(gameTurnService, playerAggregate, GameTurnResult.getInitial());
     }
 
     public Game stopGame() {
-        return new Game(gameRoundService, playerAggregate, GameRoundResult.NULL);
+        return new Game(gameTurnService, playerAggregate, GameTurnResult.NULL);
     }
 
     public Game addPlayer(final IPlayer player) {
-        return new Game(gameRoundService, playerAggregate.addPlayer(player), gameRoundResult);
+        return new Game(gameTurnService, playerAggregate.addPlayer(player), gameTurnResult);
     }
 
     public Game removePlayer(IPlayer player) {
-        return new Game(gameRoundService, playerAggregate.removePlayer(player), gameRoundResult);
+        return new Game(gameTurnService, playerAggregate.removePlayer(player), gameTurnResult);
     }
 
     public Game play(final InputNumber inputNumber) {
-        GameRoundInput gameRoundInput = new GameRoundInput(inputNumber, gameRoundResult.getOutputNumber());
-        return new Game(gameRoundService, playerAggregate.next(), gameRoundService.play(gameRoundInput));
+        GameTurnInput gameRoundInput = new GameTurnInput(inputNumber, gameTurnResult.getOutputNumber());
+        return new Game(gameTurnService, playerAggregate.next(), gameTurnService.play(gameRoundInput));
     }
 
-    public GameRoundResult getGameRoundResult() {
-        return gameRoundResult;
+    public GameTurnResult getGameTurnResult() {
+        return gameTurnResult;
     }
 
 
@@ -71,20 +75,20 @@ public class Game implements CanValidate<Game> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
-        return Objects.equals(gameRoundService, game.gameRoundService) &&
+        return Objects.equals(gameTurnService, game.gameTurnService) &&
                 Objects.equals(playerAggregate, game.playerAggregate) &&
-                Objects.equals(gameRoundResult, game.gameRoundResult);
+                Objects.equals(gameTurnResult, game.gameTurnResult);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameRoundService, playerAggregate, gameRoundResult);
+        return Objects.hash(gameTurnService, playerAggregate, gameTurnResult);
     }
 
     @Override
     public String toString() {
         return playerAggregate +
                 " and " +
-                gameRoundResult;
+                gameTurnResult;
     }
 }

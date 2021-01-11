@@ -1,7 +1,9 @@
 package com.gameofthree.game.validators;
 
 import com.gameofthree.game.entities.IPlayer;
+import com.gameofthree.game.exceptions.NotCurrentPlayerException;
 import com.gameofthree.game.exceptions.ValidationException;
+import com.gameofthree.game.service.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +22,13 @@ public class IsCurrentPlayerGameValidator implements Validator<Game> {
 
 
     @Override
-    public boolean validate(Game obj) {
+    public boolean validate(Game game) {
         return isNextTurnPlayer(game, expectedPlayer) ||
                 setInvalidState(INVALID_INPUT_FOR_GAME_MSG);
     }
 
     @Override
-    public void validateOrThrow(Game obj) throws ValidationException {
+    public void validateOrThrow(Game game) throws ValidationException {
         if (!isNextTurnPlayer(game, expectedPlayer)) {
             throw new NotCurrentPlayerException(INVALID_INPUT_FOR_GAME_MSG);
         }

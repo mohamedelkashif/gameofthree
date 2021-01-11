@@ -1,5 +1,6 @@
 package com.gameofthree.game.entities;
 
+import com.gameofthree.utils.PropertiesConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PlayerAggregate implements Iterator<PlayerAggregate> {
 
@@ -40,6 +42,13 @@ public class PlayerAggregate implements Iterator<PlayerAggregate> {
     public PlayerAggregate addPlayer(final IPlayer player) {
         List<IPlayer> newList = new ArrayList<>(players);
         newList.add(player);
+        return new PlayerAggregate(Collections.unmodifiableList(newList), rootIndex);
+    }
+
+    public PlayerAggregate removePlayer(IPlayer player) {
+        List<IPlayer> newList = players.stream()
+                .filter(p -> !p.isSame(player))
+                .collect(Collectors.toList());
         return new PlayerAggregate(Collections.unmodifiableList(newList), rootIndex);
     }
 
@@ -79,6 +88,11 @@ public class PlayerAggregate implements Iterator<PlayerAggregate> {
         return index >= 0 &&
                 index < players.size();
     }
+
+    public boolean acceptsMorePlayers() {
+        return players.size() < PLAYER_COUNT;
+    }
+
 
     @Override
     public boolean equals(Object o) {

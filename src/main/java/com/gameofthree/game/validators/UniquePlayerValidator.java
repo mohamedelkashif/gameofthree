@@ -1,7 +1,9 @@
 package com.gameofthree.game.validators;
 
 import com.gameofthree.game.entities.IPlayer;
+import com.gameofthree.game.entities.PlayerAggregate;
 import com.gameofthree.game.exceptions.ValidationException;
+import com.gameofthree.game.service.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +21,13 @@ public class UniquePlayerValidator implements Validator<Game>  {
     }
 
     @Override
-    public boolean validate(Game obj) {
+    public boolean validate(Game game) {
         return !alreadyPresentPlayer(game.getPlayerAggregate(), newPlayer)
                 || setInvalidState(NOT_UNIQUE_MSG);
     }
 
     @Override
-    public void validateOrThrow(Game obj) throws ValidationException {
+    public void validateOrThrow(Game game) throws ValidationException {
         if (alreadyPresentPlayer(game.getPlayerAggregate(), newPlayer)) {
             throw new ValidationException(NOT_UNIQUE_MSG);
         }
@@ -40,5 +42,9 @@ public class UniquePlayerValidator implements Validator<Game>  {
     private boolean setInvalidState(String message) {
         messages.add(message);
         return false;
+    }
+
+    private boolean alreadyPresentPlayer(PlayerAggregate playerAggregate, IPlayer newPlayer) {
+        return playerAggregate.hasPlayer(newPlayer);
     }
 }
