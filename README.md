@@ -69,7 +69,7 @@ Quitting
 2. Having a front-end or a dashboard for players instead of terminal.
 3. Dockerfile 
 
-#### Note: you will notice the there is two contributors, this is becayse my terminal and GitKraken is configured with two different emails so I continiued with my main one.
+#### Note: you will notice the there is two contributors, this is because my terminal and GitKraken is configured with two different emails so I continiued with my main one.
 
 ## Author
 [Mohamed Mahmoud Hassan Elkashif](mailto:muhammedmahmmoudd@gmail.com
