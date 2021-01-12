@@ -4,13 +4,13 @@ import com.gameofthree.game.entities.Computer;
 import com.gameofthree.game.service.IGameService;
 import com.gameofthree.server.sockets.ISocketIOHandler;
 
-public class AddMachineCommand extends GameCommand<String> {
+public class AddComputerCommand extends GameCommand<String> {
 
     private IGameService gameService;
     private ISocketIOHandler socketIOHandler;
 
 
-    public AddMachineCommand(IGameService gameService, ISocketIOHandler socketIOHandler) {
+    public AddComputerCommand(IGameService gameService, ISocketIOHandler socketIOHandler) {
         this.gameService = gameService;
         this.socketIOHandler = socketIOHandler;
     }

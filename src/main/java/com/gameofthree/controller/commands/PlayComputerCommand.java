@@ -10,14 +10,14 @@ import com.gameofthree.game.service.IGameService;
 import com.gameofthree.game.service.computer.IComputerGameTurn;
 import com.gameofthree.server.sockets.ISocketIOHandler;
 
-public class PlayMachineCommand extends GameCommand<String> {
+public class PlayComputerCommand extends GameCommand<String> {
 
     private IGameService gameService;
     private ISocketIOHandler socketIOHandler;
     private IComputerGameTurn computerGameTurn;
 
 
-    public PlayMachineCommand(IGameService gameService, ISocketIOHandler socketIOHandler, IComputerGameTurn computerGameTurn) {
+    public PlayComputerCommand(IGameService gameService, ISocketIOHandler socketIOHandler, IComputerGameTurn computerGameTurn) {
         this.gameService = gameService;
         this.socketIOHandler = socketIOHandler;
         this.computerGameTurn = computerGameTurn;

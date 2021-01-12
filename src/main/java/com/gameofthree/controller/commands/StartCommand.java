@@ -9,12 +9,12 @@ import com.gameofthree.game.service.Game;
 import com.gameofthree.game.service.IGameService;
 import com.gameofthree.server.sockets.ISocketIOHandler;
 
-public class Start extends GameCommand<String> {
+public class StartCommand extends GameCommand<String> {
 
     private IGameService gameService;
     private ISocketIOHandler socketIOHandler;
 
-    public Start(IGameService gameService, ISocketIOHandler socketIOHandler) {
+    public StartCommand(IGameService gameService, ISocketIOHandler socketIOHandler) {
         this.gameService = gameService;
         this.socketIOHandler = socketIOHandler;
     }
