@@ -43,7 +43,7 @@ public class GameCommandController implements Consumer<String> {
     }
 
     private void runCommand(UserInputDTO userInputDto) {
-        CommandType commandType = CommandType.valueOfString(userInputDto.getCommand());
+        CommandType commandType = CommandType.valueOfCommandString(userInputDto.getCommand());
 
         switch (commandType) {
             case ADD_PLAYER:
@@ -70,7 +70,7 @@ public class GameCommandController implements Consumer<String> {
                 new ExitCommand(gameService, socketIOHandler).execute(userInputDto.getData());
                 break;
             default:
-                new UnknownCommand(gameService, socketIOHandler).execute(userInputDto.getData());
+                new UnknownCommand(socketIOHandler).execute(userInputDto.getData());
         }
     }
 }

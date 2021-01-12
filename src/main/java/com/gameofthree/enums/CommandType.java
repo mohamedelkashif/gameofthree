@@ -11,7 +11,7 @@ public enum CommandType {
     EXIT,
     UNKNOWN;
 
-    public static CommandType valueOfString(final String commandTypeStr) {
+    public static CommandType valueOfCommandString(final String commandTypeStr) {
         return Arrays.stream(CommandType.values())
                 .filter(commandType -> commandType.toString().equals(commandTypeStr))
                 .findFirst()
