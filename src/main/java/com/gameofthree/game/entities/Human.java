@@ -50,9 +50,7 @@ public class Human implements IPlayer {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("player ")
-                .append(name);
-        return sb.toString();
+        return "player " + name;
     }
 
 }

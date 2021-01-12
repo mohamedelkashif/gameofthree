@@ -110,11 +110,10 @@ public class PlayerAggregate implements Iterator<PlayerAggregate> {
 
     @Override
     public String toString() {
-        return new StringBuffer("players: ")
-                .append(players)
-                .append(" and player ")
-                .append(rootIndex+1)
-                .append(" has next turn.")
-                .toString();
+        return "players: " +
+                players +
+                " and player " +
+                (rootIndex + 1) +
+                " has next turn.";
     }
 }

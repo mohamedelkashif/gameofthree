@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Computer implements IPlayer{
 
-    public static final Computer NULL = new Computer("-", "unknown");
     private static final String COMPUTER_NAME = "Computer";
     private static final AtomicInteger nameCounter = new AtomicInteger(1);
 
@@ -60,8 +59,6 @@ public class Computer implements IPlayer{
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("computer ")
-                .append(name);
-        return sb.toString();
+        return "computer " + name;
     }
 }
