@@ -1,4 +1,4 @@
-package com.gameofthree.Client;
+package com.gameofthree.client;
 
 import com.gameofthree.server.sockets.SocketIOHandler;
 import org.slf4j.Logger;
