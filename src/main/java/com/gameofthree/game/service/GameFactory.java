@@ -12,12 +12,6 @@ public class GameFactory {
     private IGameTurnLogic gameLogic;
     private IGameWinLogic winLogic;
 
-    /**
-     * Create a new game by defining it's play logic and win logic.
-     *
-     * @param gameLogic the logic of the game round.
-     * @param winLogic the win logic to end game.
-     */
     public GameFactory(IGameTurnLogic gameLogic, IGameWinLogic winLogic) {
         this.gameLogic = gameLogic;
         this.winLogic = winLogic;

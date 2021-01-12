@@ -1,5 +1,6 @@
 package com.gameofthree.server.sockets;
 
+import com.gameofthree.game.exceptions.ConnectionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ public class ServerStream implements Closeable {
         this.serverSocket = serverSocket;
     }
 
-    public SocketIOHandler start() throws IOException {
+    public SocketIOHandler start() {
         LOGGER.debug("Starting streaming");
         try {
             clientSocket = serverSocket.accept();
@@ -37,8 +38,9 @@ public class ServerStream implements Closeable {
         }
         return new SocketIOHandler(bufferedReader, printWriter);
     }
+
     @Override
-    public void close() throws IOException {
+    public void close() {
         LOGGER.info("Stopping server");
         try {
             bufferedReader.close();
@@ -46,7 +48,7 @@ public class ServerStream implements Closeable {
             clientSocket.close();
             LOGGER.debug("Streaming stopped");
         } catch (IOException ex) {
-            throw new RuntimeException(ex.getMessage());
+            throw new ConnectionException(ex.getMessage());
         }
     }
 }

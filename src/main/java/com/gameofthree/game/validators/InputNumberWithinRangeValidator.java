@@ -14,6 +14,8 @@ import java.util.function.Function;
 public class InputNumberWithinRangeValidator implements Validator<Game> {
 
     private static final List<InputNumber> VALID_INPUT_NUMBERS = new CopyOnWriteArrayList<>();
+    private static final Function<InputNumber, String> INVALID_INPUT_FOR_GAME_MSG =
+            number -> "can not play game because " + number + " is not within " + VALID_INPUT_NUMBERS;
 
     static {
         String[] additions = PropertiesConfigLoader.getProperties()
@@ -25,11 +27,8 @@ public class InputNumberWithinRangeValidator implements Validator<Game> {
         });
     }
 
-    private static final Function<InputNumber, String> INVALID_INPUT_FOR_GAME_MSG =
-            number -> "can not play game because "+number+" is not within "+VALID_INPUT_NUMBERS;
-
-    private List<String> messages = new ArrayList<>();
     private final InputNumber inputNumber;
+    private List<String> messages = new ArrayList<>();
 
     public InputNumberWithinRangeValidator(InputNumber inputNumber) {
         this.inputNumber = inputNumber;
@@ -46,11 +45,6 @@ public class InputNumberWithinRangeValidator implements Validator<Game> {
         if (!isValidInputNumber(inputNumber)) {
             throw new ValidationException(INVALID_INPUT_FOR_GAME_MSG.apply(inputNumber));
         }
-    }
-
-    @Override
-    public List<String> getValidationMessages() {
-        return messages;
     }
 
     private boolean isValidInputNumber(InputNumber inputNumber) {

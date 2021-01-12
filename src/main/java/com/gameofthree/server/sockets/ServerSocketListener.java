@@ -20,7 +20,7 @@ public class ServerSocketListener implements Runnable {
     public ServerSocketListener(ServerSocket serverSocket,
                                 ThreadLocal<SocketChannelRegistry> socketChannelRegistry,
                                 ThreadLocal<GameService> gameServiceThreadLocal
-                                ) {
+    ) {
         this.serverSocket = serverSocket;
         this.gameServiceThreadLocal = gameServiceThreadLocal;
         this.socketChannelRegistry = socketChannelRegistry;
@@ -29,20 +29,23 @@ public class ServerSocketListener implements Runnable {
     @Override
     public void run() {
 
-        try (ServerStream serverStream = new ServerStream(serverSocket)){
+        try (ServerStream serverStream = new ServerStream(serverSocket)) {
             SocketIOHandler socketIOHandler = serverStream.start();
             socketChannelRegistry.get().register(Thread.currentThread().getName(), socketIOHandler);
             socketIOHandler.setActiveSocketChannels(socketChannelRegistry.get().getActiveSocketChannels());
 
             GameCommandController gameCommandController = new GameCommandController(gameServiceThreadLocal.get(), socketIOHandler, new UserInputDeserializer());
 
-            socketIOHandler.send("Connected");
+            socketIOHandler.send("connected");
             socketIOHandler.getInputStream()
                     .peek(gameCommandController)
                     .filter(command -> command.equals("EXIT"))
                     .findAny();
+
+            gameServiceThreadLocal.remove();
+            socketChannelRegistry.remove();
             LOGGER.debug("Socket listener shutting down");
-        }catch (Exception ex){
+        } catch (Exception ex) {
             LOGGER.error("Socket listener exited with this exception", ex);
         }
     }

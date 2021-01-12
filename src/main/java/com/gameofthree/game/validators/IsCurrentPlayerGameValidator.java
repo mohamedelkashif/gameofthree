@@ -34,10 +34,6 @@ public class IsCurrentPlayerGameValidator implements Validator<Game> {
         }
     }
 
-    @Override
-    public List<String> getValidationMessages() {
-        return messages;
-    }
 
     private boolean isNextTurnPlayer(Game game, IPlayer expectedCurrentPlayer) {
         IPlayer gameCurrentPlayer = game.getPlayerAggregate().getRootPlayer();

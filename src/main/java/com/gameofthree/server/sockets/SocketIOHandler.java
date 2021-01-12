@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Stream;
 
-public class SocketIOHandler implements ISocketIOHandler{
+public class SocketIOHandler implements ISocketIOHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SocketIOHandler.class);
     private static final int SEND_WITH_DELAY_VALUE = 75;
@@ -32,11 +32,11 @@ public class SocketIOHandler implements ISocketIOHandler{
     }
 
     @Override
-    public void sndWithDelay(String message) {
+    public void sendWithDelay(String message) {
         send(message);
-        try{
+        try {
             Thread.sleep(SEND_WITH_DELAY_VALUE);
-        }catch (InterruptedException exception){
+        } catch (InterruptedException exception) {
             throw new RuntimeException(exception);
 
         }
@@ -66,21 +66,21 @@ public class SocketIOHandler implements ISocketIOHandler{
 
     @Override
     public boolean inputIsEmpty() {
-        try{
-           return  !bufferedReader.ready();
-        }catch (IOException exception){
+        try {
+            return !bufferedReader.ready();
+        } catch (IOException exception) {
             throw new RuntimeException(exception.getMessage());
         }
     }
 
     @Override
     public void clearInput() {
-        try{
+        try {
             Thread.sleep(100);
-            while (!inputIsEmpty()){
+            while (!inputIsEmpty()) {
                 bufferedReader.read();
             }
-        }catch (IOException | InterruptedException exception){
+        } catch (IOException | InterruptedException exception) {
             throw new RuntimeException(exception.getMessage());
         }
     }

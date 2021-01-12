@@ -13,19 +13,14 @@ public class IsGameOpenForMorePlayersValidator implements Validator<Game> {
 
     @Override
     public boolean validate(Game game) {
-        return isGameOpenForMorePlayers(game) || setInvalidState(IS_OPEN_PLAYER_AGGREGATE_MSG +game.getPlayerAggregate());
+        return isGameOpenForMorePlayers(game) || setInvalidState(IS_OPEN_PLAYER_AGGREGATE_MSG + game.getPlayerAggregate());
     }
 
     @Override
-    public void validateOrThrow(Game game) throws ValidationException {
+    public void validateOrThrow(Game game) {
         if (!isGameOpenForMorePlayers(game)) {
             throw new ValidationException(IS_OPEN_PLAYER_AGGREGATE_MSG + game.getPlayerAggregate());
         }
-    }
-
-    @Override
-    public List<String> getValidationMessages() {
-        return messages;
     }
 
     private boolean isGameOpenForMorePlayers(Game game) {

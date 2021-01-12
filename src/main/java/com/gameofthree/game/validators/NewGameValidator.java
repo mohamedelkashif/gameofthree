@@ -14,7 +14,7 @@ public class NewGameValidator implements Validator<Game> {
     @Override
     public boolean validate(Game game) {
         return isValidPlayerAggregate(game) ||
-                setInvalidState(INVALID_PLAYER_AGGREGATE_MSG);
+                setInvalidState();
     }
 
     @Override
@@ -24,17 +24,13 @@ public class NewGameValidator implements Validator<Game> {
         }
     }
 
-    @Override
-    public List<String> getValidationMessages() {
-        return messages;
-    }
 
     private boolean isValidPlayerAggregate(Game game) {
         return game.getPlayerAggregate().isValid();
     }
 
-    private boolean setInvalidState(String message) {
-        messages.add(message);
+    private boolean setInvalidState() {
+        messages.add(NewGameValidator.INVALID_PLAYER_AGGREGATE_MSG);
         return false;
     }
 }

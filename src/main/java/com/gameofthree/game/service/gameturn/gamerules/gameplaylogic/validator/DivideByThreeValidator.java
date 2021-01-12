@@ -31,11 +31,6 @@ public class DivideByThreeValidator implements Validator<GameTurnInput> {
         }
     }
 
-    @Override
-    public List<String> getValidationMessages() {
-        return messages;
-    }
-
     private boolean isValid(GameTurnInput gameTurnInput) {
         return isBiggerThanLowBoundary(gameTurnInput) &&
                 isDividableBy(gameTurnInput);

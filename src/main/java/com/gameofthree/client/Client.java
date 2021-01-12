@@ -41,7 +41,7 @@ public class Client {
             clientSocket.close();
             LOGGER.debug("Client stopped.");
         } catch (IOException ex) {
-            throw new ConnectionException("IO exception while closing connections.", ex);
+            throw new ConnectionException(ex.getMessage());
         }
     }
 }

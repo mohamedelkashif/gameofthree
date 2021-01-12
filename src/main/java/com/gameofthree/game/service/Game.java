@@ -61,11 +61,6 @@ public class Game implements CanValidate<Game> {
 
 
     @Override
-    public boolean validate(Validator<Game> validator) {
-        return validator.validate(this);
-    }
-
-    @Override
     public void validateOrThrow(Validator<Game> validator) {
         validator.validateOrThrow(this);
     }

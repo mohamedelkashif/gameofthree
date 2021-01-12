@@ -8,12 +8,11 @@ import com.gameofthree.game.service.Game;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniquePlayerValidator implements Validator<Game>  {
+public class UniquePlayerValidator implements Validator<Game> {
 
+    private static final String NOT_UNIQUE_MSG = "can not add another player";
     private IPlayer newPlayer;
     private List<String> messages = new ArrayList<>();
-    private static final String NOT_UNIQUE_MSG = "can not add another player ";
-
 
 
     public UniquePlayerValidator(IPlayer newPlayer) {
@@ -23,24 +22,20 @@ public class UniquePlayerValidator implements Validator<Game>  {
     @Override
     public boolean validate(Game game) {
         return !alreadyPresentPlayer(game.getPlayerAggregate(), newPlayer)
-                || setInvalidState(NOT_UNIQUE_MSG);
+                || setInvalidState();
     }
 
     @Override
-    public void validateOrThrow(Game game) throws ValidationException {
+    public void validateOrThrow(Game game) {
         if (alreadyPresentPlayer(game.getPlayerAggregate(), newPlayer)) {
             throw new ValidationException(NOT_UNIQUE_MSG);
         }
 
     }
 
-    @Override
-    public List<String> getValidationMessages() {
-        return messages;
-    }
 
-    private boolean setInvalidState(String message) {
-        messages.add(message);
+    private boolean setInvalidState() {
+        messages.add(UniquePlayerValidator.NOT_UNIQUE_MSG);
         return false;
     }
 

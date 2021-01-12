@@ -1,4 +1,8 @@
 package com.gameofthree.game.exceptions;
 
-public class SocketsException {
+public class SocketsException extends RuntimeException {
+    public SocketsException(String message) {
+        super(message);
+    }
+
 }

@@ -16,6 +16,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
@@ -26,22 +27,29 @@ import java.util.concurrent.TimeUnit;
 public class GameOfThreeServer {
 
     static {
-        initializeGlobalConfiguration();
+        try {
+            initializeGlobalConfiguration();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GameOfThreeServer.class);
+
     private static final String SERVER_LISTENERS_COUNT = PropertiesConfigLoader.getProperties().getProperty("server_listeners_count");
     private static final String PORT = PropertiesConfigLoader.getProperties().getProperty("port");
 
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
 
         LOGGER.info("The game has been started");
 
         try (GameServer gameServer = new GameServer(Integer.parseInt(PORT))) {
             ServerSocket serverSocket = gameServer.start();
             runServerListenerThreads(serverSocket);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         LOGGER.info("The Game has been ended / closed");
@@ -81,7 +89,7 @@ public class GameOfThreeServer {
         return new GameFactory(gameLogic, winLogic).buildNewGame();
     }
 
-    private static void initializeGlobalConfiguration() {
+    private static void initializeGlobalConfiguration() throws FileNotFoundException {
         PropertyConfigurator.configure(PropertyConfigurator.class.getClassLoader().getResourceAsStream("log4j.properties"));
         PropertiesConfigLoader.initialize("application.properties");
     }

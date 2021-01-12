@@ -21,5 +21,6 @@ public class GameTurnService implements IGameTurnService {
         OutputNumber outputNumber = gameTurnLogic.apply(gameTurnInput);
         boolean winner = winLogic.apply(outputNumber);
 
-        return new GameTurnResult(outputNumber, winner);    }
+        return new GameTurnResult(outputNumber, winner);
+    }
 }

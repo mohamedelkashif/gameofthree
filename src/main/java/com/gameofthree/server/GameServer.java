@@ -1,5 +1,6 @@
 package com.gameofthree.server;
 
+import com.gameofthree.game.exceptions.SocketsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class GameServer implements Closeable {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(GameServer.class);
 
     private int serverPort;
@@ -22,7 +24,7 @@ public class GameServer implements Closeable {
             serverSocket = new ServerSocket(serverPort);
             return serverSocket;
         }catch (IOException ioException){
-            throw new RuntimeException("Exception when opening server socket");
+            throw new SocketsException(ioException.getMessage());
         }
     }
 
@@ -36,7 +38,7 @@ public class GameServer implements Closeable {
                     return;
             }
         }catch (IOException ioException){
-            throw new RuntimeException("Exception when closing server socket");
+            throw new SocketsException(ioException.getMessage());
         }
 
     }

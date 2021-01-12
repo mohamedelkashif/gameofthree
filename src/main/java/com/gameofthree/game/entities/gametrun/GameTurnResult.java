@@ -39,11 +39,12 @@ public class GameTurnResult {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Round result: ");
-        sb.append("outputNumber ").append(outputNumber);
-        sb.append(", winner ").append(winner);
-        sb.append('.');
-        return sb.toString();
+        return "Round result:" +
+                "outputNumber " +
+                outputNumber +
+                ", winner " +
+                winner +
+                ".";
     }
 
 

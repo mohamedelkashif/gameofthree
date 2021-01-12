@@ -14,6 +14,7 @@ public class ComputerGameTurnService implements IComputerGameTurn {
 
 
     private static final Map<Integer, Integer> ADDITION_VALUES;
+
     static {
         ADDITION_VALUES = new HashMap<>();
         ADDITION_VALUES.put(0, 0);
