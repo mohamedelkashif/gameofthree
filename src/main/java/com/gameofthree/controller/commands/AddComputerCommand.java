@@ -20,7 +20,7 @@ public class AddComputerCommand extends GameCommand<String> {
         Computer newPlayer = Computer.generate();
 
         gameService.addPlayer(newPlayer);
-        socketIOHandler.broadcast("Added AI player " + newPlayer.getName() + " to game.");
+        socketIOHandler.broadcast("Added computer player " + newPlayer.getName() + " to game.");
 
         doNext(data);
     }

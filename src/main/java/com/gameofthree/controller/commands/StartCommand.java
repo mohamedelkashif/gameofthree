@@ -21,16 +21,16 @@ public class StartCommand extends GameCommand<String> {
 
     @Override
     public void execute(String data) {
-        Human authorizedCurrentPlayer = new Human(Thread.currentThread().getName(), "");
+        Human currentPlayer = new Human(Thread.currentThread().getName(), "");
         try {
             gameService.startGame();
         } catch (GameException e) {
-            new GameExceptionHandler(socketIOHandler).handle(e, authorizedCurrentPlayer);
+            new GameExceptionHandler(socketIOHandler).handle(e, currentPlayer);
             return;
         }
 
         Game gameAfterStart = gameService.getGame();
-        String finalMessage = buildFinalMessage(gameAfterStart);
+        String finalMessage = buildResponseMsg(gameAfterStart);
 
         socketIOHandler.broadcast(finalMessage);
 
@@ -38,7 +38,7 @@ public class StartCommand extends GameCommand<String> {
         doNext(String.valueOf(gameRoundResultAfterStart.getOutputNumber().getValue()));
     }
 
-    private String buildFinalMessage(Game gameAfterStart) {
+    private String buildResponseMsg(Game gameAfterStart) {
         PlayerAggregate playerAfterStart = gameAfterStart.getPlayerAggregate();
         GameTurnResult gameRoundEndResult = gameAfterStart.getGameTurnResult();
 

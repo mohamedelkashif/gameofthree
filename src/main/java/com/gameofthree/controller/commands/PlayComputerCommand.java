@@ -46,7 +46,7 @@ public class PlayComputerCommand extends GameCommand<String> {
             gameService.play(calculatedNumberByAi, nextPlayer);
 
             Game gameAfterPlay = gameService.getGame();
-            String message2 = buildFinalMessage(nextPlayer, gameAfterPlay, calculatedNumberByAi.toString());
+            String message2 = buildResponseMsg(nextPlayer, gameAfterPlay, calculatedNumberByAi.toString());
 
             socketIOHandler.broadcast(message2);
 
@@ -54,13 +54,13 @@ public class PlayComputerCommand extends GameCommand<String> {
         }
     }
 
-    private String buildFinalMessage(IPlayer playingCurrentPlayer, Game gameAfterPlay, String inputNumber) {
-        GameTurnResult playingRoundResult = gameAfterPlay.getGameTurnResult();
+    private String buildResponseMsg(IPlayer playingCurrentPlayer, Game gameAfterPlay, String inputNumber) {
+        GameTurnResult gameAfterPlayGameTurnResult = gameAfterPlay.getGameTurnResult();
 
         return "\n"+playingCurrentPlayer +
                 " played number " +
                 inputNumber +
                 ". The result is " +
-                playingRoundResult;
+                gameAfterPlayGameTurnResult;
     }
 }

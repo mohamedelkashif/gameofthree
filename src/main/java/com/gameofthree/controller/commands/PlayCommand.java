@@ -11,7 +11,7 @@ import com.gameofthree.game.service.Game;
 import com.gameofthree.game.service.IGameService;
 import com.gameofthree.server.sockets.ISocketIOHandler;
 
-public class PlayCommand extends GameCommand<String>  {
+public class PlayCommand extends GameCommand<String> {
 
     private IGameService gameService;
     private ISocketIOHandler socketIOHandler;
@@ -25,7 +25,7 @@ public class PlayCommand extends GameCommand<String>  {
 
     @Override
     public void execute(String data) {
-        IPlayer authorizedPlayer = new Human(Thread.currentThread().getName(), "");  //inject authorized user
+        IPlayer authorizedPlayer = new Human(Thread.currentThread().getName(), "");
         InputNumber parsedRawInputNumber = parseRawInputNumber(data);
 
         Game gameBeforePlay = gameService.getGame();
@@ -39,7 +39,7 @@ public class PlayCommand extends GameCommand<String>  {
         }
 
         Game gameAfterPlay = gameService.getGame();
-        String message = buildFinalMessage(playersBeforePlay.getRootPlayer(), gameAfterPlay, data);
+        String message = buildResponseMsg(playersBeforePlay.getRootPlayer(), gameAfterPlay, data);
 
         socketIOHandler.broadcast(message);
 
@@ -48,21 +48,21 @@ public class PlayCommand extends GameCommand<String>  {
 
     }
 
-    private String buildFinalMessage(IPlayer playingCurrentPlayer, Game gameAfterPlay, String inputNumber) {
-        GameTurnResult playingRoundResult = gameAfterPlay.getGameTurnResult();
+    private String buildResponseMsg(IPlayer playingCurrentPlayer, Game gameAfterPlay, String inputNumber) {
+        GameTurnResult gameAfterPlayGameTurnResult = gameAfterPlay.getGameTurnResult();
 
         return playingCurrentPlayer +
                 " played number " +
                 inputNumber +
                 ". The result is " +
-                playingRoundResult;
+                gameAfterPlayGameTurnResult;
     }
 
     private InputNumber parseRawInputNumber(String rawInputNumber) {
         try {
             return new InputNumber(Integer.parseInt(rawInputNumber));
         } catch (NumberFormatException ex) {
-            socketIOHandler.send("ERROR: "+ex.getMessage());
+            socketIOHandler.send("ERROR: " + ex.getMessage());
         }
         return null;
     }

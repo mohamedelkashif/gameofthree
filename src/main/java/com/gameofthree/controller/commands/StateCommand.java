@@ -22,15 +22,15 @@ public class StateCommand extends GameCommand<String>{
         Game currentGame = gameService.getGame();
 
         PlayerAggregate players = currentGame.getPlayerAggregate();
-        GameTurnResult currentRoundResult = currentGame.getGameTurnResult();
+        GameTurnResult gameTurnResult = currentGame.getGameTurnResult();
 
-        String finalMessage = buildFinalMessage(players, currentRoundResult);
+        String finalMessage = buildResponseMsg(players, gameTurnResult);
         socketIOHandler.send(finalMessage);
 
         doNext(data);
     }
 
-    private String buildFinalMessage(PlayerAggregate players, GameTurnResult currentRoundResult) {
+    private String buildResponseMsg(PlayerAggregate players, GameTurnResult currentRoundResult) {
         return "Currently playing "+
                         players + " Last " +
                         currentRoundResult;

@@ -5,7 +5,7 @@ import com.gameofthree.game.entities.IPlayer;
 import com.gameofthree.game.service.IGameService;
 import com.gameofthree.server.sockets.ISocketIOHandler;
 
-public class ExitCommand extends GameCommand<String>  {
+public class ExitCommand extends GameCommand<String> {
 
     private IGameService gameService;
     private ISocketIOHandler socketIOHandler;
@@ -17,11 +17,11 @@ public class ExitCommand extends GameCommand<String>  {
 
     @Override
     public void execute(String data) {
-        IPlayer authorizedPlayer = new Human(Thread.currentThread().getName(), "");  //inject authorized user
+        IPlayer authorizedPlayer = new Human(Thread.currentThread().getName(), "");
         gameService.removePlayer(authorizedPlayer);
         gameService.stopGame();
 
-        socketIOHandler.send("Goodbye.");
+        socketIOHandler.send("Quitting");
         doNext(data);
     }
 }
