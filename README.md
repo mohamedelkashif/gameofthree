@@ -29,7 +29,7 @@
 - You should have the following two file, take a look at them and you can change the values in them depending on your preferences
 `resources/application.properties` and `resources/log4j.properties`
 - Run the following command in order to build the maven project `mvn clean install` 
-- Start the server through running the following command `mvn exec:java -Dexec.mainClass=com.gameofthree.GameOfThreeServer`
+- Start the server through running the following command `mvn exec:java`
 - Run [netcat](https://nmap.org/ncat/) client on the same port the server running `netcat localhost 9999`
 - Tou should see a message with connected string on both terminals.
 
@@ -60,6 +60,14 @@ EXIT
 Quitting
 ```
 
+#### Testing
+- You can run tests through either from IDE or through commandline `mvn test`
+
+#### Future work
+
+1. Adding more test cases.
+2. Having a front-end or a dashboard for players instead of terminal.
+3. Dockerfile 
 ## Author
 [Mohamed Mahmoud](mailto:muhammedmahmmoudd@gmail.com
 )
