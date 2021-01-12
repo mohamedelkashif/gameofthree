@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 public class PlayerAggregate implements Iterator<PlayerAggregate> {
 
     private static final int DEFAULT_ROOT_INDEX = Integer.parseInt(PropertiesConfigLoader.getProperties()
-            .getProperty("com.challenge.application.game.index_of_player_that_starts_first", "0"));
+            .getProperty("index_of_player_that_starts_first", "0"));
 
     private static final int PLAYER_COUNT = Integer.parseInt(PropertiesConfigLoader.getProperties()
-            .getProperty("com.challenge.application.game.player_count"));
+            .getProperty("player_count"));
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayerAggregate.class);
 
