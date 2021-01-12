@@ -1,4 +1,8 @@
 package com.gameofthree.game.exceptions.exceptionhandler;
 
-public interface ExceptionHandler {
+import com.gameofthree.game.entities.IPlayer;
+
+public interface ExceptionHandler<E extends RuntimeException> {
+    void handle(E ex, IPlayer currentPlayer);
+
 }
