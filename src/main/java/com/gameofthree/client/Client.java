@@ -1,5 +1,6 @@
 package com.gameofthree.client;
 
+import com.gameofthree.game.exceptions.ConnectionException;
 import com.gameofthree.server.sockets.SocketIOHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,7 @@ public class Client {
             clientSocket.close();
             LOGGER.debug("Client stopped.");
         } catch (IOException ex) {
-            throw new RuntimeException("IO exception while closing connections.", ex);
+            throw new ConnectionException("IO exception while closing connections.", ex);
         }
     }
 }
