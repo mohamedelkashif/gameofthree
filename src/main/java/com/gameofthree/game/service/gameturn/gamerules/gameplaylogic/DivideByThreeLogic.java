@@ -12,7 +12,7 @@ import java.util.function.Function;
 public class DivideByThreeLogic implements IGameTurnLogic  {
 
     private static final int DIVIDER = Integer.parseInt(PropertiesConfigLoader.getProperties()
-            .getProperty("com.challenge.application.game.divider"));
+            .getProperty("divider"));
 
     private final List<Validator<GameTurnInput>> validators;
 

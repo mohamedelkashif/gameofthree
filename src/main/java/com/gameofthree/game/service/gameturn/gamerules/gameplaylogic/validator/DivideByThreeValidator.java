@@ -14,7 +14,7 @@ public class DivideByThreeValidator implements Validator<GameTurnInput> {
     private static final String INVALID_INPUT_MSG = "could not play this round because of invalid input ";
     private static final int LOW_BOUNDARY = 2;
     private static final int DIVIDER = Integer.parseInt(PropertiesConfigLoader.getProperties()
-            .getProperty("com.challenge.application.game.divider"));
+            .getProperty("divider"));
 
     private List<String> messages = new ArrayList<>();
 
