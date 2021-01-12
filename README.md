@@ -69,5 +69,5 @@ Quitting
 2. Having a front-end or a dashboard for players instead of terminal.
 3. Dockerfile 
 ## Author
-[Mohamed Mahmoud](mailto:muhammedmahmmoudd@gmail.com
+[Mohamed Mahmoud Hassan Elkashif](mailto:muhammedmahmmoudd@gmail.com
 )
