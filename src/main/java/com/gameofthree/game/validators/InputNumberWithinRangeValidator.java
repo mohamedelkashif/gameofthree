@@ -3,15 +3,27 @@ package com.gameofthree.game.validators;
 import com.gameofthree.game.entities.InputNumber;
 import com.gameofthree.game.exceptions.ValidationException;
 import com.gameofthree.game.service.Game;
+import com.gameofthree.utils.PropertiesConfigLoader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 
 public class InputNumberWithinRangeValidator implements Validator<Game> {
+
     private static final List<InputNumber> VALID_INPUT_NUMBERS = new CopyOnWriteArrayList<>();
 
+    static {
+        String[] additions = PropertiesConfigLoader.getProperties()
+                .getProperty("input_numbers")
+                .split("[/s,.]");
+        Arrays.stream(additions).forEach(addition -> {
+            int additionInt = Integer.parseInt(addition);
+            VALID_INPUT_NUMBERS.add(new InputNumber(additionInt));
+        });
+    }
 
     private static final Function<InputNumber, String> INVALID_INPUT_FOR_GAME_MSG =
             number -> "can not play game because "+number+" is not within "+VALID_INPUT_NUMBERS;
